@@ -25,16 +25,23 @@ def index(lang):
     data = requests.get(data_url).content
 
     root = etree.fromstring(data)
-    jobs = []
+    jobs = {}
 
     for job in root:
-        jobs.append(recursive_dict(job)[1])
-
-    jobs = [job for job in jobs if lang.upper() in job['JOBREF']]
+        job = recursive_dict(job)[1]
+        jobs[job['JOBREF']] = job
 
     for job in jobs:
-        job['POSTDATE'] = parsedate(job['POSTDATE'])
-        job['EXPIRYDATE'] = parsedate(job['EXPIRYDATE'])
+        jobs[job]['POSTDATE'] = parsedate(jobs[job]['POSTDATE'])
+        jobs[job]['EXPIRYDATE'] = parsedate(jobs[job]['EXPIRYDATE'])
+
+        if lang == 'fr' and 'FR' in job:
+            english_id = job.replace('FR', 'EN')
+            jobs[job]['SALARYMIN'] = jobs[english_id].get('SALARYMIN', None)
+            jobs[job]['SALARYMAX'] = jobs[english_id].get('SALARYMAX', None)
+
+    jobs = [jobs[job] for job in jobs if lang.upper() in job]
+    jobs.sort(key= lambda job: job['JOBREF'], reverse=True)
 
     return render_template('base.html', jobs=jobs, lang=lang)
 
