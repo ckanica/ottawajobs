@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/img/favicon.png">
   </head>
   <body>
@@ -35,40 +35,37 @@
       </p>
 
 
-<section id="search">
-  <form id="punchTokens" name="punchTokens" action="/search" method="GET">
-  <ul id="token-list">
-    <li id="last-child">
-      <input id="input-field" placeholder="Search: Childcare, Paramedic, Instructor..." autocomplete="on" type="text">
-    </li>
-  </ul>
+    <section id="search">
+      <form id="punchTokens" name="punchTokens">
+          <ul id="token-list">
+            <li id="last-child">
+              <input id="input-field" placeholder="Search: Childcare, Paramedic, Instructor..." autocomplete="on" type="text">
+            </li>
+          </ul>
 
-  <button id="search-btn"><i class="fa fa-search"></i></button>
+      <button id="search-btn" disabled><i class="fa fa-search"></i></button>
 
-  <ul id="autocomplete-list"></ul>
+      <ul id="autocomplete-list"></ul>
 
-    <a class="link-large" href="/search?query=All+posts">All posts</a>
+        <!--<a class="link-large" href="/{{lang}}">All posts</a>
 
-  <input type="hidden" id="query" name="query" value="All posts">
-</form>
+        <input type="hidden" id="query" name="query" value="All posts">-->
 
-    {% for job in jobs %}
-        {% include 'item.html' %}
-    {% endfor %}
+      </form>
+
+        {% for job in jobs %}
+            {% include 'item.html' %}
+        {% endfor %}
 
     </section>
 
-      <footer>
-        <ul id="footer-navigation">
-          <li >&copy; 2014 <a href="http://www.punchgirls.com">Punchgirls</a></li>
-          <li ><a href="/contact">Contact</a></li>
-          <li ><a href="/terms">Terms</a></li>
-          <li ><a href="/privacy">Privacy Policy</a></li>
-          <li ><a href="https://github.com/punchgirls"><i class="fa fa-github"></i></a></li>
-          <li ><a href="https://twitter.com/jobspunchgirls"><i class="fa fa-twitter"></i></a></li>
-        </ul>
-      </footer>
     </div>
+
+    <script type="text/javascript" src="{{url_for('static', filename='js/lunr.min.js')}}"></script>
+
+    {% block scripts %}
+        <script type="text/javascript" src="{{url_for('static', filename='js/search.js')}}"></script>
+    {% endblock %}
 
   </body>
 </html>

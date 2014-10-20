@@ -4,12 +4,10 @@
         <li><a href="/{{job['JOBREF']}}">{{job['POSITION']}}</a></li>
 
         <li> |</li>
-        <li>${{job['SALARYMIN']}} - ${{job['SALARYMAX']}} {{job['SALARYTYPE']}}</li>
+        <li><i class="fa fa-dollar"></i>{{job['SALARYMIN']}} - <i class="fa fa-dollar"></i>{{job['SALARYMAX']}} {{job['SALARYTYPE']}}</li>
     </ul>
     <ul id="post-details-30">
-        <li><i class="fa fa-tags"></i>CSS, HTML, JavaScript</li>
-        <li>|</li>
-        <li>On-site only</li>
+        <li><i class="fa fa-institution"></i>City Of Ottawa</li>
     </ul>
     <p class="description"> {{job['JOB_SUMMARY']|safe}}</p>
 
