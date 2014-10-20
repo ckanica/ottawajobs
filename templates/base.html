@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>jobs.punchgirls.com | Search</title>
+    {% if lang == 'en' %}
+        <title>jobs at City of Ottawa</title>
+    {% else %}
+        <title>Emplois à la ville d'Ottawa</title>
+    {% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
@@ -16,7 +20,7 @@
       <ul id="main-navigation">
           <li id="page-title"><h1><a id="title-link" href="/">
 
-        jobs at City of Ottawa</a></h1></li>
+        {% if lang == 'en' %}jobs at City of Ottawa{% else %}Emplois à la ville d'Ottawa{% endif %}</a></h1></li>
 
             <li><a href="/about">About</a></li>
             {% if lang == 'en' %}

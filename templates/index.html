@@ -4,7 +4,11 @@
     <form id="punchTokens" name="punchTokens">
         <ul id="token-list">
           <li id="last-child">
-            <input id="input-field" placeholder="Search: Childcare, Paramedic, Instructor..." autocomplete="on" type="text">
+            {% if lang == 'en' %}
+                <input id="input-field" placeholder="Search: Childcare, Paramedic, Instructor..." autocomplete="on" type="text">
+            {% else %}
+                <input id="input-field" placeholder="Recherche: Finances, Parcs, Transport..." autocomplete="on" type="text">
+            {% endif %}
           </li>
         </ul>
 

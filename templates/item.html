@@ -7,11 +7,16 @@
         <li><i class="fa fa-dollar"></i>{{job['SALARYMIN']}} - <i class="fa fa-dollar"></i>{{job['SALARYMAX']}} {{job['SALARYTYPE']}}</li>
     </ul>
     <ul id="post-details-30">
-        <li><i class="fa fa-institution"></i>City Of Ottawa</li>
+        {% if lang == 'en' %}
+            <li><i class="fa fa-institution"></i>City Of Ottawa</li>
+        {% else %}
+            <li><i class="fa fa-institution"></i>Ville d'Ottawa</li>
+        {% endif %}
     </ul>
     <p class="description"> {{job['JOB_SUMMARY']|safe}}</p>
 
         <ul class="section-footer">
+            {% if lang == 'en' %}
             <li>
                 <span>Posted on {{job['POSTDATE']}}</span>
             </li>
@@ -21,5 +26,16 @@
             <li>
                 <a href="{{job['JOBURL']}}"><i class="fa fa-check"></i>apply</a>
             </li>
+            {% else %}
+            <li>
+                <span>Date d'affichage du concours: {{job['POSTDATE']}}</span>
+            </li>
+            <li>
+                <span>Date de clôture: {{job['EXPIRYDATE']}}</span>
+            </li>
+            <li>
+                <a href="{{job['JOBURL']}}"><i class="fa fa-check"></i>apply</a>
+            </li>
+            {% endif %}
         </ul>
     </section>
