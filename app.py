@@ -17,6 +17,10 @@ data_url = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
 def root():
     return redirect('/en/')
 
+@app.route('/about')
+def about():
+    return render_template('about.html', lang='en')
+
 @app.route('/<lang>/')
 def index(lang):
     jobs = clean_data(lang)
