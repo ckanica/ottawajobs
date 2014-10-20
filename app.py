@@ -13,9 +13,6 @@ locale.setlocale( locale.LC_ALL, '' )
 
 data_url = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
 
-def recursive_dict(element):
-     return element.tag, dict(map(recursive_dict, element)) or element.text
-
 @app.route('/')
 def root():
     return redirect('/en/')
@@ -24,13 +21,25 @@ def root():
 def index(lang):
     jobs = clean_data(lang)
 
-    return render_template('base.html', jobs=jobs, lang=lang)
+    return render_template('index.html', jobs=jobs, lang=lang)
 
 @app.route('/<lang>/data/')
 def data(lang):
     jobs = clean_data(lang)
 
     return jsonify({'jobs':jobs})
+
+@app.route('/job/<job_ref>/')
+def job_listing(job_ref):
+    lang = 'en' if 'EN' in job_ref else 'fr'
+    jobs = clean_data(lang)
+
+    job = [job for job in jobs if job['JOBREF'] == job_ref][0]
+
+    return render_template('job.html', job=job)
+
+def recursive_dict(element):
+     return element.tag, dict(map(recursive_dict, element)) or element.text
 
 def clean_data(lang):
     data = requests.get(data_url).content

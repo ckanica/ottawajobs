@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="{{job['JOBREF']}}" class="listing-item">
+        <img src="{{url_for('static', filename='images/ottawa-logo.jpg')}}" style="width:60px;">
+        <ul>
+            <li><a href="/{{job['JOBREF']}}">{{job['POSITION']}}</a></li>
+
+            <li> |</li>
+            <li><i class="fa fa-dollar"></i>{{job['SALARYMIN']}} - <i class="fa fa-dollar"></i>{{job['SALARYMAX']}} {{job['SALARYTYPE']}}</li>
+        </ul>
+        <ul id="post-details-30">
+            <li><i class="fa fa-institution"></i>City Of Ottawa</li>
+        </ul>
+
+        <h2>Job Summary</h2>
+        <p class="description"> {{job['JOB_SUMMARY']|safe}} </p>
+
+        <h2>Education &amp; Experience</h2>
+        <p class="description"> {{job['EDUCATIONANDEXP']|safe}} </p>
+
+        <h2>Language, Certificates &amp; Licenses</h2>
+        <p class="description"> {{job['LANGUAGE_CERTIFICATES']|safe}} </p>
+
+        <h2>Knowledge</h2>
+        <p class="description"> {{job['KNOWLEDGE']|safe}} </p>
+
+            <ul class="section-footer">
+                <li>
+                    <span>Posted on {{job['POSTDATE']}}</span>
+                </li>
+                <li>
+                    <span>Expires on {{job['EXPIRYDATE']}}</span>
+                </li>
+                <li>
+                    <a href="{{job['JOBURL']}}"><i class="fa fa-check"></i>apply</a>
+                </li>
+            </ul>
+        </section>
+
+{% endblock %}

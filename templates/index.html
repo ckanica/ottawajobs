@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for job in jobs %}
+        {% include 'item.html' %}
+    {% endfor %}
+
+
+    <p id="noresult" style="display:none;">No results found for this query</p>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{{url_for('static', filename='js/lunr.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/search.js')}}"></script>
+
+    <script type="text/javascript">
+        lang = "{{lang}}";
+    </script>
+{% endblock %}
