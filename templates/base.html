@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jobs.punchgirls.com | Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+  </head>
+  <body>
+      <div class="wrapper">
+
+    <header>
+      <ul id="main-navigation">
+          <li id="page-title"><h1><a id="title-link" href="/">
+
+        jobs at City of Ottawa</a></h1></li>
+
+            <li><a href="/about">About</a></li>
+            {% if lang == 'en' %}
+                <li><a href="/fr">Français</a></li>
+            {% else %}
+                <li><a href="/en">English</a></li>
+            {% endif %}
+            <li><a href="/help">Help</a></li>
+      </ul>
+    </header>
+
+    <section id="content">
+      <p id="notices">
+
+
+      </p>
+
+
+<section id="search">
+  <form id="punchTokens" name="punchTokens" action="/search" method="GET">
+  <ul id="token-list">
+    <li id="last-child">
+      <input id="input-field" placeholder="Search: Childcare, Paramedic, Instructor..." autocomplete="on" type="text">
+    </li>
+  </ul>
+
+  <button id="search-btn"><i class="fa fa-search"></i></button>
+
+  <ul id="autocomplete-list"></ul>
+
+    <a class="link-large" href="/search?query=All+posts">All posts</a>
+
+  <input type="hidden" id="query" name="query" value="All posts">
+</form>
+
+    {% for job in jobs %}
+        {% include 'item.html' %}
+    {% endfor %}
+
+    </section>
+
+      <footer>
+        <ul id="footer-navigation">
+          <li >&copy; 2014 <a href="http://www.punchgirls.com">Punchgirls</a></li>
+          <li ><a href="/contact">Contact</a></li>
+          <li ><a href="/terms">Terms</a></li>
+          <li ><a href="/privacy">Privacy Policy</a></li>
+          <li ><a href="https://github.com/punchgirls"><i class="fa fa-github"></i></a></li>
+          <li ><a href="https://twitter.com/jobspunchgirls"><i class="fa fa-twitter"></i></a></li>
+        </ul>
+      </footer>
+    </div>
+
+  </body>
+</html>

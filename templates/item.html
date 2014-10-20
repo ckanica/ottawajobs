@@ -1,0 +1,41 @@
+<section id="post-30" class="listing-item">
+    <img src="{{url_for('static', filename='images/ottawa-logo.jpg')}}" style="width:60px;">
+    <ul>
+        <li><a href="/{{job['JOBREF']}}">{{job['POSITION']}}</a></li>
+
+        <li> |</li>
+        <li>${{job['SALARYMIN']}} - ${{job['SALARYMAX']}} {{job['SALARYTYPE']}}</li>
+    </ul>
+    <ul id="post-details-30">
+        <li><i class="fa fa-tags"></i>CSS, HTML, JavaScript</li>
+        <li>|</li>
+        <li>On-site only</li>
+    </ul>
+    <p class="description"> {{job['JOB_SUMMARY']|safe}}</p>
+
+        <form class="message-hidden msg-form" onsubmit="sendMsg(30); return false;" id="msg-form-30" action="/message/30" method="POST">
+
+            <textarea onkeyup="updateCountdownMsg(30)" id="message-txt-30" name="message" maxlength="200" placeholder="Add a message to your application"></textarea><br/>
+
+            <span class="countdown" id="countdown-msg-30">
+                200 characters remaining
+            </span>
+
+            <span class="link" onclick="hideMsgForm(30)">cancel</span>
+            <button>Add message</button>
+        </form>
+
+        <script src="/js/limit_description.js"></script>
+
+        <ul class="section-footer">
+            <li>
+                <span>Posted on {{job['POSTDATE'].strftime('%Y-%b-%d')}}</span>
+            </li>
+            <li>
+                <span>Expires on {{job['EXPIRYDATE'].strftime('%Y-%b-%d')}}</span>
+            </li>
+            <li>
+                <a href="{{job['JOBURL']}}"><i class="fa fa-check"></i>apply</a>
+            </li>
+        </ul>
+    </section>

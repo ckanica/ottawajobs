@@ -1,0 +1,871 @@
+/* GENERAL */
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Droid Sans Mono", sans-serif;
+  font-size: 0.9em;
+  font-size-adjust: 0.54;
+}
+
+.wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#content {
+  padding-bottom: 120px;
+}
+
+#home, #about, #pricing,
+#help, #login, #contact,
+#terms, #privacy-policy,
+#new-post, #contact-applicant,
+#company-edit, #subscription,
+#payment-history,
+#edit-payment-info,
+#edit-post, #developer-profile,
+#password-recovery, #otp,
+#confirm, #invoice, #not-found {
+  margin: 0 auto;
+  line-height: 1.8em;
+  max-width: 600px;
+}
+
+#invoice {
+  width: 20em;
+}
+
+#search, #company-dashboard,
+#applicants-post, #my-applications,
+#my-favorites {
+  margin: 0 auto;
+  max-width: 850px;
+}
+
+#home, header,
+#footer-navigation,
+#login, #contact,
+#signup, #new-post,
+#contact-applicant,
+#company-edit,
+#subscription,
+#payment-history,
+#developer-profile,
+#edit-post, #password-recovery,
+#otp, #confirm,
+#edit-payment-info,
+#not-found {
+  text-align: center;
+}
+
+ul  {
+  padding-left: 0;
+}
+
+li {
+  display: inline;
+  list-style: none;
+}
+
+i {
+  margin-right: 5px;
+}
+
+.link-large {
+  display: block;
+  margin: 40px 0;
+  font-size: 1.17em;
+}
+
+#search .link-large {
+  margin: 10px 0 0 0;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+a, a:visited, .link, .application-msg,
+.bio-icon, .application-status {
+  color: #EB374B;
+}
+
+a:hover, a:active, .link:hover {
+  text-decoration: none;
+}
+
+#active-link {
+  text-decoration: underline;
+}
+
+#underline-none {
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.highlight-box {
+  margin-bottom: 30px;
+  background: #fafafa;
+  border: solid 1px #dadada;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+a#delete {
+  clear: both;
+  display: block;
+}
+
+/* FORMS AND INPUT */
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"]  {
+  margin-bottom: 15px;
+  padding-left: 5px;
+  height: 35px;
+  width: 20em;
+  font-family: "Droid Sans Mono", sans-serif;
+  font-size: 1em;
+  border: 2px solid #d9d9d9;
+}
+
+input[type="checkbox"] {
+  display: inline;
+}
+
+textarea {
+  font-family: "Droid Sans Mono", sans-serif;
+  font-size: 1em;
+  height: 200px;
+  width: 20em;
+  padding: 8px 0 0 5px;
+  border: 2px solid #d9d9d9;
+}
+
+#home {
+  margin: 40px 0;
+}
+
+.edit-post-form label,  .new-post-form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+#login-form ul {
+  padding: 0;
+  text-align: left;
+  margin: 0 auto;
+  width: 19em;
+}
+
+#forgot-password-link {
+  float: right;
+}
+
+button, #post_ad {
+  padding: 0 20px;
+  height: 44px;
+  background:  #FFCC00;
+  color: white;
+  outline: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: hand;
+  cursor: pointer;
+}
+
+.buttons {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+
+#confirm-form, #developer-profile-form,
+#edit-profile {
+  margin-top: 10px;
+}
+
+#login-form button,
+#contact-form button,
+#contact-applicant button,
+#edit-profile button,
+#edit-subscription button,
+#edit-payment button,
+#edit-post-form button,
+.btn-large, #confirm-form button {
+  margin-top: 20px;
+}
+
+::-webkit-input-placeholder {
+  font-family: "Droid Sans Mono", sans-serif;
+}
+
+::-moz-placeholder {
+  font-family: "Droid Sans Mono", sans-serif;
+  font-size-adjust: 0.54;
+}  /*firefox 19+*/
+
+:-ms-input-placeholder {
+  font-family: "Droid Sans Mono", sans-serif;
+} /* ie*/
+
+input:-moz-placeholder {
+  font-family: "Droid Sans Mono", sans-serif;
+}
+
+.message-hidden, .note-hidden, .hidden, .toggle-hidden {
+  display: none;
+}
+
+.msg-form, .note-form {
+  width: 20em;
+  text-align: center;
+  margin: 15px 0;
+}
+
+.countdown {
+  display: block;
+  width: 20em;
+  margin: 5px 0 10px 0;
+}
+
+#developer-profile .countdown,
+#confirm .countdown {
+  margin: 0 auto;
+}
+
+/* NOTICES */
+
+#notices {
+  text-align: center;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+/* HEADER */
+
+h1  {
+  font-size: 1.5em;
+  display: inline-block;
+}
+
+#center  {
+  margin: 0 auto 0.8em;
+  font-size: 1.5em;
+  display: block;
+}
+
+#main-navigation a {
+  color: black;
+}
+
+#title-link {
+  text-decoration: none;
+}
+
+#title-link-center {
+  margin: 0 auto;
+  display: block;
+  text-decoration: none;
+}
+
+#main-navigation li {
+  margin-right: 15px;
+}
+
+#main-navigation #page-title {
+  display: block;
+  margin-right: 0;
+}
+
+#gravatar-mini {
+  display: none;
+}
+
+#main-navigation #post_ad {
+  height: 40px;
+  background: #EB374B;
+  text-decoration: none;
+  color: white;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 40px;
+  margin-top: 40px;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+/* HOME */
+
+#home-page h2 {
+  margin-top: 60px;
+}
+
+#latest-posts {
+  font-size: 1.1em;
+}
+
+#latest-posts li {
+  display: list-item;
+}
+
+#latest-posts a {
+  color: #4d4d4d;
+}
+
+/* LISTING ITEM (POST, APPLICATIONS ETC.)*/
+
+.listing-item {
+  padding-bottom: 15px;
+  min-height: 100px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e1e8ed;
+}
+
+.listing-item img {
+  float: left;
+  margin-right: 20px;
+}
+
+.message, .note, .bio {
+  margin-top: 20px;
+}
+
+.description {
+  margin: 0;
+  line-height: 1.5em;
+}
+
+.section-footer li {
+  line-height: 2em;
+}
+
+/* SIGNUP, NEW POST */
+
+#signup, #new-post, #edit-post,
+#edit-payment-info {
+  margin: 0 auto;
+  padding: 0;
+  line-height: 1.8em;
+}
+
+#signup img {
+  margin-bottom: 10px;
+}
+
+#signup form, #new-post form,
+#edit-post form, #contact-applicant form,
+#edit-payment-info form {
+  margin: 0 auto;
+  width: 20em;
+  text-align: left;
+}
+
+#credit-cards img, .card-icon {
+  width: 41px;
+}
+
+#signup .cvc,
+#edit-payment-info .cvc {
+  margin-right: 14px;
+  width: 42px;
+  float: left;
+}
+
+#signup .short-input,
+#edit-payment-info .short-input {
+  width: 40px;
+  float: left;
+}
+
+#signup .expires_on,
+#edit-payment-info .expires_on {
+  display: inline;
+  margin: 0 8px;
+  float: left;
+  font-size: 1em;
+  line-height: 40px;
+}
+
+#signup h3, #edit-payment-info h3 {
+  margin-bottom: 0;
+}
+
+#signup .signup-plans,
+#subscription .signup-plans {
+  width: 100%;
+  margin: 15px 0;
+  padding-left: 5px;
+}
+
+#subscription .signup-plans {
+  width: 20em;
+}
+
+#signup button {
+  margin: 20px auto;
+  display: block;
+}
+
+/* PRICING */
+
+.plan {
+  margin: 0 0 10px 0;
+  padding: 10px;
+  display: block;
+  text-align: left;
+  background-color: #F1F1F1;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.plan:hover {
+  background-color: #C3F1FF;
+  color: #111;
+}
+
+.plan-price {
+  float: right;
+}
+
+/* HELP PAGE */
+
+#help {
+  padding-left: 40px;
+}
+
+.help-menu li, .example-post li {
+  display: list-item;
+}
+
+.help-item-title {
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.05em;
+  font-weight: 900;
+}
+
+.highlight-box li {
+  margin-bottom: 5px;
+}
+
+#help .highlight-box li {
+  display: list-item;
+}
+
+/* PRIVACY */
+
+#privacy-info-list {
+  padding-left: 18px;
+}
+
+#privacy-info-list li {
+  display: list-item;
+  list-style:  disc;
+}
+
+/* COMPANY PROFILE*/
+
+#company-profile {
+  margin: 0 auto;
+  line-height: 1.8em;
+  max-width: 810px;
+}
+
+#company-profile .company-profile-item {
+  float: left;
+  display: inline-block;
+  width: 250px;
+  max-width: 250px;
+  margin: 0 20px 20px 0;
+}
+
+#company-profile li {
+  display: list-item;
+}
+
+#company-profile #digits {
+  max-width: 250px;
+}
+
+#company-profile #digits input {
+  max-width: 240px;
+}
+
+#company-profile #digits input.cvc {
+  max-width: 40px;
+}
+
+#company-profile #digits input.short-input {
+  max-width: 30px;
+}
+
+/* PAYMENT HISTORY */
+
+#payment-history table {
+  text-align: left;
+  padding: 0;
+  margin: 0 auto;
+  font-size: 0.8em;
+  width: 26.5em;
+}
+
+#payment-history tr th {
+  padding: 0 5px;
+  color: white;
+  background-color: #808080;
+}
+
+#payment-history tr td {
+  padding: 0 5px;
+  background-color: #F8F8F8;
+}
+
+/* LOGIN PAGE*/
+
+#login .highlight-box {
+  margin: 30px auto;
+  width: 20em;
+  padding-right: 18px;
+}
+
+/* FOOTER */
+
+.section-footer {
+  margin: 0;
+}
+
+footer {
+  height: 70px;
+  position: absolute;
+  bottom:0;
+  left:0;
+  right: 0;
+  margin-top: 120px;
+}
+
+.fa-twitter, .fa-github {
+  font-size: 1.8em;
+}
+
+/* SEARCH BOX and PUNCHTOKENS */
+
+punchTokens {
+  position: relative;
+  width: 22em;
+  margin: 0 auto;
+}
+
+#token-list {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16.5em;
+  min-height: 40px;
+  border: 2px solid #eee;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+}
+
+#new-post #token-list,
+#edit-post #token-list {
+  width: 20.5em;
+  min-height: 35px;
+  border: 2px solid #d9d9d9;
+}
+
+#last-child {
+  display: inline-block;
+}
+
+#input-field {
+  margin: 0;
+  padding-left: 6px;
+  border: none;
+  outline: none;
+  height: 33px;
+}
+
+#autocomplete-list {
+  position: absolute;
+  background: white;
+  list-style: none;
+  display: none;
+  width: 15.8em;
+  margin: -17px auto 0;
+  padding: 5px;
+  text-align: left;
+  border: 2px solid #eee;
+  z-index: 1;
+  max-height: 250px;
+  overflow: auto;
+}
+
+#new-post #autocomplete-list,
+#edit-post #autocomplete-list {
+  width: 19.8em;
+  border: 1px solid #eee;
+}
+
+#autocomplete-list li {
+  display: block;
+  margin: 4px 0;
+}
+
+#search-btn {
+  margin-left: -9px;
+  vertical-align: middle;
+  width: 3.75em;
+  padding: 0 12px;
+  color: white;
+  border: none;
+  background: #fc0;
+  font-size: 1em;
+}
+
+#search-btn i {
+  margin: 0;
+  font-size: 2em;
+}
+
+.token {
+  display: inline-block;
+  margin: 4px 2px 0 2px;
+  padding: 3px 7px;
+  font-size: 1.2em;
+}
+
+#new-post .token,
+#edit-post .token {
+  font-size: 1em;
+}
+
+.token-delete {
+  color: #fc0;
+  cursor: hand;
+  cursor: pointer;
+}
+
+#highlight, #autocomplete-list li:hover {
+  font-weight: bolder;
+  color: #fc0;
+}
+
+.location {
+  margin-bottom: 10px;
+}
+
+.remote {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+/* SEARCH FILTER */
+#filter {
+  margin-top: 10px;
+}
+
+#selected-location {
+  display: none;
+}
+
+@media only screen and (min-width: 480px)  {
+  /* SEARCH BOX */
+
+  #signup form, #new-post form,
+  #edit-post form, #contact-applicant form,
+  #edit-payment-info form {
+    margin: 0 auto;
+    width: 25em;
+    text-align: left;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="password"],
+  textarea,
+  #subscription .signup-plans,
+  .msg-form, .note-form,
+  .countdown {
+    width: 25em;
+  }
+
+  #login .highlight-box {
+    margin: 30px auto;
+    width: 30em;
+  }
+
+  #login-form ul {
+    padding: 0;
+    text-align: left;
+    margin: 0 auto;
+    width: 25.75em;
+  }
+
+  .plan {
+    font-size: 1em;
+  }
+
+  #payment-history table {
+    width: 40em;
+  }
+
+  #invoice {
+  width: 23em;
+  }
+
+  #credit-cards img, .card-icon {
+    width: 50px;
+  }
+
+  /* SEARCH BOX and PUNCHTOKENS */
+
+  #punchTokens {
+    width: 30em;
+  }
+
+  #token-list {
+    width: 25em;
+  }
+
+  #new-post #token-list,
+  #edit-post #token-list {
+    width: 25.5em;
+  }
+
+  #autocomplete-list {
+    width: 24.3em;
+  }
+
+  #new-post #autocomplete-list,
+  #edit-post #autocomplete-list {
+    width: 24.8em;
+  }
+}
+
+@media only screen and (min-width: 768px)  {
+  #main-navigation #page-title {
+    display: inline;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  #center {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .section-footer li {
+    margin-left: 10px;
+  }
+
+  .section-footer {
+    display: block;
+    text-align: right;
+  }
+
+  .toggle {
+    float: left;
+  }
+
+  #title-link {
+    margin-right: 60px;
+  }
+
+  /* SEARCH BOX and PUNCHTOKENS*/
+
+  #punchTokens {
+    width: 40em;
+  }
+
+  #token-list {
+    width: 35em;
+  }
+
+  #autocomplete-list {
+    width: 34.3em;
+  }
+}
+
+@media only screen and (min-width: 915px)  {
+
+  #punchTokens {
+    margin: 0;
+  }
+ }
+
+@media only screen and (min-width: 1024px)  {
+  /* HEADER */
+
+  .background-image {
+    background: url('/img/punchgirls_small.png') left bottom no-repeat;
+  }
+
+  #gravatar-mini {
+    display: inline;
+    float: none;
+    width: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+
+  #home {
+    margin: 30px 0 60px 0;
+  }
+
+  #login .highlight-box {
+    margin: 30px auto;
+    width: 35em;
+  }
+
+  .input-short {
+    width: 5em;
+  }
+
+  #login-form ul {
+    padding: 0;
+    text-align: left;
+    margin: 0 auto;
+    width: 26em;
+  }
+
+  #title-link {
+    margin-right: 70px;
+  }
+}
+
+@media only screen and (min-width: 1200px)  {
+  /* HEADER */
+
+  .background-image {
+    background: url('/img/punchgirls_large.png') left bottom no-repeat;
+  }
+ }
