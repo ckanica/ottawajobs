@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <a class="link-large" href="/{{lang}}">..Back to Search Listings</a>
     <section id="{{job['JOBREF']}}" class="listing-item">
         <img src="{{url_for('static', filename='images/ottawa-logo.jpg')}}" style="width:60px;">
         <ul>
@@ -14,16 +15,16 @@
         </ul>
 
         <h2>Job Summary</h2>
-        <p class="description"> {{job['JOB_SUMMARY']|safe}} </p>
+        <div class="description"> {{job['JOB_SUMMARY']|safe}} </div>
 
         <h2>Education &amp; Experience</h2>
-        <p class="description"> {{job['EDUCATIONANDEXP']|safe}} </p>
+        <div class="description"> {{job['EDUCATIONANDEXP']|safe}} </div>
 
         <h2>Language, Certificates &amp; Licenses</h2>
-        <p class="description"> {{job['LANGUAGE_CERTIFICATES']|safe}} </p>
+        <div class="description"> {{job['LANGUAGE_CERTIFICATES']|safe}} </div>
 
         <h2>Knowledge</h2>
-        <p class="description"> {{job['KNOWLEDGE']|safe}} </p>
+        <div class="description"> {{job['KNOWLEDGE']|safe}} </div>
 
             <ul class="section-footer">
                 <li>

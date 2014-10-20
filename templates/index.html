@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <form id="punchTokens" name="punchTokens">
+        <ul id="token-list">
+          <li id="last-child">
+            <input id="input-field" placeholder="Search: Childcare, Paramedic, Instructor..." autocomplete="on" type="text">
+          </li>
+        </ul>
+
+    <button id="search-btn" disabled><i class="fa fa-search"></i></button>
+
+    </form>
+
     {% for job in jobs %}
         {% include 'item.html' %}
     {% endfor %}

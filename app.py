@@ -36,7 +36,7 @@ def job_listing(job_ref):
 
     job = [job for job in jobs if job['JOBREF'] == job_ref][0]
 
-    return render_template('job.html', job=job)
+    return render_template('job.html', job=job, lang=lang)
 
 def recursive_dict(element):
      return element.tag, dict(map(recursive_dict, element)) or element.text

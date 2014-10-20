@@ -869,3 +869,7 @@ punchTokens {
     background: url('/img/punchgirls_large.png') left bottom no-repeat;
   }
  }
+
+.description strong {
+    font-size: 1.2em;
+}
