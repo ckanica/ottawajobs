@@ -1,7 +1,7 @@
 import requests
 import locale
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, jsonify
 from dateutil.parser import parse as parsedate
 from lxml import etree
 
@@ -22,6 +22,17 @@ def root():
 
 @app.route('/<lang>/')
 def index(lang):
+    jobs = clean_data(lang)
+
+    return render_template('base.html', jobs=jobs, lang=lang)
+
+@app.route('/<lang>/data/')
+def data(lang):
+    jobs = clean_data(lang)
+
+    return jsonify({'jobs':jobs})
+
+def clean_data(lang):
     data = requests.get(data_url).content
 
     root = etree.fromstring(data)
@@ -32,8 +43,8 @@ def index(lang):
         jobs[job['JOBREF']] = job
 
     for job in jobs:
-        jobs[job]['POSTDATE'] = parsedate(jobs[job]['POSTDATE'])
-        jobs[job]['EXPIRYDATE'] = parsedate(jobs[job]['EXPIRYDATE'])
+        jobs[job]['POSTDATE'] = parsedate(jobs[job]['POSTDATE']).strftime('%Y-%b-%d')
+        jobs[job]['EXPIRYDATE'] = parsedate(jobs[job]['EXPIRYDATE']).strftime('%Y-%b-%d')
 
         if lang == 'fr' and 'FR' in job:
             english_id = job.replace('FR', 'EN')
@@ -43,7 +54,7 @@ def index(lang):
     jobs = [jobs[job] for job in jobs if lang.upper() in job]
     jobs.sort(key= lambda job: job['JOBREF'], reverse=True)
 
-    return render_template('base.html', jobs=jobs, lang=lang)
+    return jobs
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
