@@ -1,24 +1,39 @@
+var index;
 $(document).ready(function(){
 
-    $.getJSON("/" + lang + "/data", function(data){
-        console.log(data);
-    });
-
-    var index = lunr(function () {
-        this.field('title', {boost: 10})
-        this.field('body')
+    index = lunr(function () {
+        this.field('position', {boost: 10})
+        this.field('company')
+        this.field('summary')
+        this.field('educationexperience')
+        this.field('language_certs')
+        this.field('knowledge')
+        this.field('salarymin')
+        this.field('salarymax')
+        this.field('salarytype')
+        this.field('postdate')
+        this.field('expirydate')
         this.ref('id')
     })
 
-    index.add({
-        id: 1,
-        title: 'Foo',
-        body: 'Foo foo foo!'
-    })
+    $.getJSON("/" + lang + "/data", function(data){
 
-    index.add({
-        id: 2,
-        title: 'Bar',
-        body: 'Bar bar bar!'
-    })
+        for (var i=0; i<data['jobs'].length; i++){
+            job = data['jobs'][i];
+
+            index.add({
+                id: job['JOBREF'],
+                position: job['POSITION'],
+                company: job['COMPANY_DESC'],
+                educationexperience: job['EDUCATIONANDEXP'],
+                language_certs: job['LANGUAGE_CERTIFICATES'],
+                knowledge: job['KNOWLEDGE'],
+                salarymin: job['SALARYMIN'],
+                salarymax: job['SALARYMAX'],
+                salarytype: job['SALARYTYPE'],
+                postdate: job['POSTDATE'],
+                expirydate: job['EXPIRYDATE']
+            });
+        }
+    });
 });
