@@ -36,4 +36,25 @@ $(document).ready(function(){
             });
         }
     });
+
+    $('#input-field').keyup(function(){
+        search = index.search($(this).val());
+
+        if ($(this).val() == ''){
+            $('.listing-item').show();
+            return
+        }
+
+        if (search.length === 0){
+            $('#noresult').show();
+        } else{
+            $('#noresult').hide();
+        }
+
+        $('.listing-item').hide();
+        for (var i=0; i<search.length; i++){
+            var ref = search[i]['ref'];
+            $('#' + ref).show();
+        }
+    });
 });
