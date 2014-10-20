@@ -38,9 +38,11 @@ def job_listing(job_ref):
     lang = 'en' if 'EN' in job_ref else 'fr'
     jobs = clean_data(lang)
 
+    other_ref = job_ref.replace('EN', 'FR') if lang == 'en' else job_ref.replace('FR', 'EN')
+
     job = [job for job in jobs if job['JOBREF'] == job_ref][0]
 
-    return render_template('job.html', job=job, lang=lang)
+    return render_template('job.html', job=job, lang=lang, other_ref=other_ref)
 
 def recursive_dict(element):
      return element.tag, dict(map(recursive_dict, element)) or element.text
