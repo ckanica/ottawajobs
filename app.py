@@ -3,7 +3,7 @@ import locale
 import os
 import json
 
-from flask import Flask, render_template, redirect, jsonify
+from flask import Flask, Response, render_template, redirect, jsonify
 from dateutil.parser import parse as parsedate
 from lxml import etree
 from lxml.builder import E
@@ -75,6 +75,8 @@ def eluta():
 
         division = etree.SubElement(job, 'division')
         division.text = BeautifulSoup(j['COMPANY_DESC']).get_text()
+
+    return Response(tostring(page), mimetype='text/xml')
 
 
 @app.route('/<lang>/')
