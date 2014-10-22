@@ -50,7 +50,13 @@ def eluta():
         joburl.text = j['JOBURL']
 
         description = etree.SubElement(job, 'description')
-        description.text = BeautifulSoup(j['JOB_SUMMARY'] + j['EDUCATIONANDEXP'] + j['KNOWLEDGE'] + j['LANGUAGE_CERTIFICATES']).get_text()
+        description.text = BeautifulSoup(
+                    (j['JOB_SUMMARY']
+                        + j['EDUCATIONANDEXP']
+                        + j['KNOWLEDGE']
+                        + j['LANGUAGE_CERTIFICATES']
+                    ).encode('utf8')
+                    ).get_text()
 
         jobcity = etree.SubElement(job, 'jobcity')
         jobcity.text = 'Ottawa'
@@ -74,9 +80,13 @@ def eluta():
         expirydate.text = j['EXPIRYDATE']
 
         division = etree.SubElement(job, 'division')
-        division.text = BeautifulSoup(j['COMPANY_DESC']).get_text()
+        division.text = BeautifulSoup(j['COMPANY_DESC'].encode('utf8')).get_text()
 
-    return Response(tostring(page), mimetype='text/xml')
+    return Response(tostring(page, xml_declaration=True,
+                                   #encoding='iso-8859-1',
+                                   encoding='utf-8',
+                                   pretty_print=True),
+                    mimetype='text/xml')
 
 
 @app.route('/<lang>/')
