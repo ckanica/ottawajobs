@@ -1,10 +1,14 @@
 import requests
 import locale
 import os
+import json
 
 from flask import Flask, render_template, redirect, jsonify
 from dateutil.parser import parse as parsedate
 from lxml import etree
+from lxml.builder import E
+from lxml.etree import tostring, fromstring
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 
@@ -21,6 +25,57 @@ def root():
 @app.route('/about')
 def about():
     return render_template('about.html', lang='en')
+
+@app.route('/eluta')
+def eluta():
+    jobs = clean_data('en')
+
+    page = etree.Element('elutaxml', xmlns="http://www.eluta.ca/elutaxml", version="1.0")
+    doc = etree.ElementTree(page)
+
+    employer = etree.SubElement(page, 'employer')
+    name = etree.SubElement(employer, 'name')
+    name.text = 'City of Ottawa'
+
+    for j in jobs:
+        job = etree.SubElement(employer, 'job')
+
+        title = etree.SubElement(job, 'title')
+        title.text = j['POSITION']
+
+        jobref = etree.SubElement(job, 'jobref')
+        jobref.text = j['JOBREF']
+
+        joburl = etree.SubElement(job, 'joburl')
+        joburl.text = j['JOBURL']
+
+        description = etree.SubElement(job, 'description')
+        description.text = BeautifulSoup(j['JOB_SUMMARY'] + j['EDUCATIONANDEXP'] + j['KNOWLEDGE'] + j['LANGUAGE_CERTIFICATES']).get_text()
+
+        jobcity = etree.SubElement(job, 'jobcity')
+        jobcity.text = 'Ottawa'
+
+        jobprovince = etree.SubElement(job, 'jobprovince')
+        jobprovince.text = 'ON'
+
+        salarymin = etree.SubElement(job, 'salarymin')
+        salarymin.text = j['SALARYMIN']
+
+        salarymax = etree.SubElement(job, 'salarymax')
+        salarymax.text = j['SALARYMAX']
+
+        salarytype = etree.SubElement(job, 'salarytype')
+        salarytype.text = j['SALARYTYPE']
+
+        postdate = etree.SubElement(job, 'postdate')
+        postdate.text = j['POSTDATE']
+
+        expirydate = etree.SubElement(job, 'expirydate')
+        expirydate.text = j['EXPIRYDATE']
+
+        division = etree.SubElement(job, 'division')
+        division.text = BeautifulSoup(j['COMPANY_DESC']).get_text()
+
 
 @app.route('/<lang>/')
 def index(lang):
