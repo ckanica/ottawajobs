@@ -47,7 +47,7 @@ def eluta():
         jobref.text = j['JOBREF']
 
         joburl = etree.SubElement(job, 'joburl')
-        joburl.text = j['JOBURL']
+        joburl.text = "http://www.ottawacityjobs.ca/job/{0}".format(j['JOBREF'])
 
         description = etree.SubElement(job, 'description')
         description.text = BeautifulSoup(
