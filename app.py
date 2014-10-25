@@ -3,7 +3,7 @@ import locale
 import os
 import json
 
-from flask import Flask, Response, render_template, redirect, jsonify
+from flask import Flask, Response, render_template, redirect, jsonify, request
 from dateutil.parser import parse as parsedate
 from lxml import etree
 from lxml.builder import E
@@ -94,6 +94,13 @@ def index(lang):
     jobs = clean_data(lang)
 
     return render_template('index.html', jobs=jobs, lang=lang)
+
+@app.route('/remote/')
+def remote():
+    remote_addr = request.remote_addr
+    forward = request.headers.getlist("X-Forwarded-For")
+
+    return render_template('remote.html', remote=remote_addr, forward=forward)
 
 @app.route('/<lang>/data/')
 def data(lang):
