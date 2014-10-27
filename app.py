@@ -99,8 +99,9 @@ def index(lang):
 def remote():
     remote_addr = request.remote_addr
     forward = request.headers.getlist("X-Forwarded-For")
+    client = request.headers.getlist('x-client-ip')
 
-    return render_template('remote.html', remote=remote_addr, forward=forward)
+    return render_template('remote.html', remote=remote_addr, forward=forward, client=client)
 
 @app.route('/<lang>/data/')
 def data(lang):
