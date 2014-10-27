@@ -91,7 +91,12 @@ def eluta():
 
 @app.route('/<lang>/')
 def index(lang):
-    jobs = clean_data(lang)
+    internal = False
+    client = request.headers.getlist('x-client-ip')[0]
+    if client == '198.48.225.108':
+        internal = True
+
+    jobs = clean_data(lang, internal=internal)
 
     return render_template('index.html', jobs=jobs, lang=lang)
 
@@ -99,7 +104,7 @@ def index(lang):
 def remote():
     remote_addr = request.remote_addr
     forward = request.headers.getlist("X-Forwarded-For")
-    client = request.headers.getlist('x-client-ip')
+    client = request.headers.getlist('x-client-ip')[0]
 
     return render_template('remote.html', remote=remote_addr, forward=forward, client=client)
 
@@ -111,8 +116,14 @@ def data(lang):
 
 @app.route('/job/<job_ref>/')
 def job_listing(job_ref):
+    internal = False
+    client = request.headers.getlist('x-client-ip')[0]
+    if client == '198.48.225.108':
+        internal = True
+
     lang = 'en' if 'EN' in job_ref else 'fr'
-    jobs = clean_data(lang)
+
+    jobs = clean_data(lang, internal=internal)
 
     other_ref = job_ref.replace('EN', 'FR') if lang == 'en' else job_ref.replace('FR', 'EN')
 
@@ -123,7 +134,7 @@ def job_listing(job_ref):
 def recursive_dict(element):
      return element.tag, dict(map(recursive_dict, element)) or element.text
 
-def clean_data(lang):
+def clean_data(lang, internal=False):
     data = requests.get(data_url).content
 
     root = etree.fromstring(data)
@@ -141,6 +152,11 @@ def clean_data(lang):
             english_id = job.replace('FR', 'EN')
             jobs[job]['SALARYMIN'] = jobs[english_id].get('SALARYMIN', None)
             jobs[job]['SALARYMAX'] = jobs[english_id].get('SALARYMAX', None)
+
+    if internal:
+        for job in jobs:
+            jobs[job]['JOBURL'] = jobs[job]['JOBURL'].replace('careers.ottawa.ca',
+                                                        'careers.ottawa.ca:43443')
 
     jobs = [jobs[job] for job in jobs if lang.upper() in job]
     jobs.sort(key= lambda job: job['JOBREF'], reverse=True)
