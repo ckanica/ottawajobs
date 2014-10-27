@@ -16,7 +16,8 @@ app.debug = True
 
 locale.setlocale( locale.LC_ALL, '' )
 
-data_url = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
+DATA_URL = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
+INTERNAL_NETWORK = '192.234.223.100'
 
 @app.route('/')
 def root():
@@ -93,7 +94,7 @@ def eluta():
 def index(lang):
     internal = False
     client = request.headers.getlist('x-client-ip')[0]
-    if client == '198.48.225.108':
+    if client == INTERNAL_NETWORK:
         internal = True
 
     jobs = clean_data(lang, internal=internal)
@@ -118,7 +119,7 @@ def data(lang):
 def job_listing(job_ref):
     internal = False
     client = request.headers.getlist('x-client-ip')[0]
-    if client == '198.48.225.108':
+    if client == INTERNAL_NETWORK:
         internal = True
 
     lang = 'en' if 'EN' in job_ref else 'fr'
@@ -135,7 +136,7 @@ def recursive_dict(element):
      return element.tag, dict(map(recursive_dict, element)) or element.text
 
 def clean_data(lang, internal=False):
-    data = requests.get(data_url).content
+    data = requests.get(DATA_URL).content
 
     root = etree.fromstring(data)
     jobs = {}
