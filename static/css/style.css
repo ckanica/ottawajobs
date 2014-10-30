@@ -873,3 +873,7 @@ punchTokens {
 .description strong {
     font-size: 1.2em;
 }
+
+#search {
+    min-height:400px;
+}
