@@ -2,6 +2,7 @@ import requests
 import locale
 import os
 import json
+import ckanapi
 
 from flask import Flask, Response, render_template, redirect, jsonify, request
 from dateutil.parser import parse as parsedate
