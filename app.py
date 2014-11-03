@@ -9,6 +9,7 @@ from lxml import etree
 from lxml.builder import E
 from lxml.etree import tostring, fromstring
 from bs4 import BeautifulSoup
+from functools import wraps
 
 app = Flask(__name__)
 
@@ -18,6 +19,16 @@ locale.setlocale( locale.LC_ALL, '' )
 
 DATA_URL = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
 INTERNAL_NETWORK = '192.234.223.100'
+
+def internal_filter(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        client = request.headers.getlist('x-client-ip')
+        if len(client) and client[0] == INTERNAL_NETWORK:
+            kwargs['internal'] = True
+
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/')
 def root():
@@ -91,12 +102,8 @@ def eluta():
 
 
 @app.route('/<lang>/')
-def index(lang):
-    internal = False
-    client = request.headers.getlist('x-client-ip')[0]
-    if client == INTERNAL_NETWORK:
-        internal = True
-
+@internal_filter
+def index(lang, internal=None):
     jobs = clean_data(lang, internal=internal)
 
     return render_template('index.html', jobs=jobs, lang=lang)
@@ -105,23 +112,20 @@ def index(lang):
 def remote():
     remote_addr = request.remote_addr
     forward = request.headers.getlist("X-Forwarded-For")
-    client = request.headers.getlist('x-client-ip')[0]
+    client = request.headers.getlist('x-client-ip')
 
     return render_template('remote.html', remote=remote_addr, forward=forward, client=client)
 
 @app.route('/<lang>/data/')
-def data(lang):
-    jobs = clean_data(lang)
+@internal_filter
+def data(lang, internal=None):
+    jobs = clean_data(lang, internal=internal)
 
     return jsonify({'jobs':jobs})
 
 @app.route('/job/<job_ref>/')
-def job_listing(job_ref):
-    internal = False
-    client = request.headers.getlist('x-client-ip')[0]
-    if client == INTERNAL_NETWORK:
-        internal = True
-
+@internal_filter
+def job_listing(job_ref, internal=None):
     lang = 'en' if 'EN' in job_ref else 'fr'
 
     jobs = clean_data(lang, internal=internal)
