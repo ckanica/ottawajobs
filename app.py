@@ -18,7 +18,6 @@ app.debug = True
 
 locale.setlocale( locale.LC_ALL, '' )
 
-DATA_URL = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
 INTERNAL_NETWORK = os.getenv('INTERNAL_NETWORK', '127.0.0.1')
 
 def internal_filter(f):
@@ -141,7 +140,10 @@ def recursive_dict(element):
      return element.tag, dict(map(recursive_dict, element)) or element.text
 
 def clean_data(lang, internal=False):
-    data = requests.get(DATA_URL).content
+    ckan = ckanapi.RemoteCKAN('http://data.ottawa.ca')
+    data_url = ckan.action.package_show(id='job-opportunities')['resources'][0]['url']
+
+    data = requests.get(data_url).content
 
     root = etree.fromstring(data)
     jobs = {}
