@@ -18,7 +18,7 @@ app.debug = True
 locale.setlocale( locale.LC_ALL, '' )
 
 DATA_URL = 'http://data.ottawa.ca/storage/f/20141019T170040/city_jobs.xml'
-INTERNAL_NETWORK = '192.234.223.100'
+INTERNAL_NETWORK = os.getenv('INTERNAL_NETWORK', '127.0.0.1')
 
 def internal_filter(f):
     @wraps(f)
