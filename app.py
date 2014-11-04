@@ -20,6 +20,10 @@ locale.setlocale( locale.LC_ALL, '' )
 
 INTERNAL_NETWORK = os.getenv('INTERNAL_NETWORK', '127.0.0.1')
 
+#The City of Ottawa external proxy requires a port number to be added
+# to internal IPs in order for the url to resolve properly. So if a person inside
+# the City of Ottawa internal network is trying to access this site, we need
+# to rewrite the job application urls from careers.ottawa.ca to careers.ottawa.ca:43443
 def internal_filter(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
