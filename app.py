@@ -57,20 +57,20 @@ def eluta():
         job = etree.SubElement(employer, 'job')
 
         title = etree.SubElement(job, 'title')
-        title.text = j['POSITION']
+        title.text = j.get('POSITION', '')
 
         jobref = etree.SubElement(job, 'jobref')
-        jobref.text = j['JOBREF']
+        jobref.text = j.get('JOBREF', '')
 
         joburl = etree.SubElement(job, 'joburl')
         joburl.text = "http://www.ottawacityjobs.ca/job/{0}".format(j['JOBREF'])
 
         description = etree.SubElement(job, 'description')
         description.text = BeautifulSoup(
-                    (j['JOB_SUMMARY']
-                        + j['EDUCATIONANDEXP']
-                        + j['KNOWLEDGE']
-                        + j['LANGUAGE_CERTIFICATES']
+                    (j.get('JOB_SUMMARY', '')
+                        + j.get('EDUCATIONANDEXP', '')
+                        + j.get('KNOWLEDGE', '')
+                        + j.get('LANGUAGE_CERTIFICATES', '')
                     ).encode('utf8')
                     ).get_text()
 
@@ -81,22 +81,22 @@ def eluta():
         jobprovince.text = 'ON'
 
         salarymin = etree.SubElement(job, 'salarymin')
-        salarymin.text = j['SALARYMIN']
+        salarymin.text = j.get('SALARYMIN', '')
 
         salarymax = etree.SubElement(job, 'salarymax')
-        salarymax.text = j['SALARYMAX']
+        salarymax.text = j.get('SALARYMAX', '')
 
         salarytype = etree.SubElement(job, 'salarytype')
-        salarytype.text = j['SALARYTYPE']
+        salarytype.text = j.get('SALARYTYPE' '')
 
         postdate = etree.SubElement(job, 'postdate')
-        postdate.text = j['POSTDATE']
+        postdate.text = j.get('POSTDATE', '')
 
         expirydate = etree.SubElement(job, 'expirydate')
-        expirydate.text = j['EXPIRYDATE']
+        expirydate.text = j.get('EXPIRYDATE', '')
 
         division = etree.SubElement(job, 'division')
-        division.text = BeautifulSoup(j['COMPANY_DESC'].encode('utf8')).get_text()
+        division.text = BeautifulSoup(j.get('COMPANY_DESC', '').encode('utf8')).get_text()
 
     return Response(tostring(page, xml_declaration=True,
                                    #encoding='iso-8859-1',
