@@ -1,0 +1,5 @@
+---
+applications:
+- name: ottawajobs
+  memory: 128M
+  buildpack: https://github.com/cloudfoundry/python-buildpack

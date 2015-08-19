@@ -148,7 +148,7 @@ def recursive_dict(element):
 
 def clean_data(lang, internal=False):
     ckan = ckanapi.RemoteCKAN(CKAN_URL, apikey=APIKEY)
-    data_url = ckan.action.resource_show(id=RESOURCE_ID)
+    data_url = ckan.action.resource_show(id=RESOURCE_ID)['url']
 
     data = requests.get(data_url).content
 
