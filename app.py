@@ -19,6 +19,9 @@ app.debug = True
 locale.setlocale( locale.LC_ALL, '' )
 
 INTERNAL_NETWORK = os.getenv('INTERNAL_NETWORK', '127.0.0.1')
+CKAN_URL = os.getenv('CKAN_URL', 'http://data.ottawa.ca')
+APIKEY = os.getenv('APIKEY', '')
+RESOURCE_ID = os.getenv('RESOURCE_ID', 'dbe7dd6d-3d63-4f9c-8866-c0b88ce9d31a')
 
 #The City of Ottawa external proxy requires a port number to be added
 # to internal IPs in order for the url to resolve properly. So if a person inside
@@ -144,8 +147,8 @@ def recursive_dict(element):
      return element.tag, dict(map(recursive_dict, element)) or element.text
 
 def clean_data(lang, internal=False):
-    ckan = ckanapi.RemoteCKAN('http://data.ottawa.ca')
-    data_url = ckan.action.package_show(id='job-opportunities')['resources'][0]['url']
+    ckan = ckanapi.RemoteCKAN(CKAN_URL, apikey=APIKEY)
+    data_url = ckan.action.resource_show(id=RESOURCE_ID)
 
     data = requests.get(data_url).content
 
