@@ -165,8 +165,9 @@ def clean_data(lang, internal=False):
 
         if lang == 'fr' and 'FR' in job:
             english_id = job.replace('FR', 'EN')
-            jobs[job]['SALARYMIN'] = jobs[english_id].get('SALARYMIN', None)
-            jobs[job]['SALARYMAX'] = jobs[english_id].get('SALARYMAX', None)
+            if english_id in jobs:
+                jobs[job]['SALARYMIN'] = jobs[english_id].get('SALARYMIN', None)
+                jobs[job]['SALARYMAX'] = jobs[english_id].get('SALARYMAX', None)
 
     if internal:
         for job in jobs:
