@@ -19,7 +19,7 @@ app.debug = True
 locale.setlocale( locale.LC_ALL, '' )
 
 INTERNAL_NETWORK = os.getenv('INTERNAL_NETWORK', '127.0.0.1')
-CKAN_URL = os.getenv('CKAN_URL', 'http://data.ottawa.ca')
+CKAN_URL = os.getenv('CKAN_URL', 'http://data.ottawa.ca/')
 APIKEY = os.getenv('APIKEY', '')
 RESOURCE_ID = os.getenv('RESOURCE_ID', 'dbe7dd6d-3d63-4f9c-8866-c0b88ce9d31a')
 
@@ -150,14 +150,17 @@ def clean_data(lang, internal=False):
     ckan = ckanapi.RemoteCKAN(CKAN_URL, apikey=APIKEY)
     data_url = ckan.action.resource_show(id=RESOURCE_ID)['url']
 
-    data = requests.get(data_url).content
+    headers = {'Authorization': APIKEY}
+    data = requests.get(data_url, headers=headers).content
 
     root = etree.fromstring(data)
     jobs = {}
 
     for job in root:
         job = recursive_dict(job)[1]
-        jobs[job['JOBREF']] = job
+        jobref = '-'.join(job['JOBREF'].split('-')[:-1])
+        jobs[jobref] = job
+        job['JOBREF'] = jobref
 
     for job in jobs:
         jobs[job]['POSTDATE'] = parsedate(jobs[job]['POSTDATE']).strftime('%Y-%b-%d')
